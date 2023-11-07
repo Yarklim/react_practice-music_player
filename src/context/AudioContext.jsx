@@ -1,20 +1,39 @@
 import { createContext, useState } from 'react';
-import trackList from '../data/trackList';
+import tracksList from '../data/trackList';
 
 const audio = new Audio();
 
 export const AudioContext = createContext({});
 
 const AudioProvider = ({ children }) => {
-  const [currentTrack, setCurrentTrack] = useState(trackList[0]);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTrack, setCurrentTrack] = useState(tracksList[0]);
+  const [isPlaying, setPlaying] = useState(false);
 
-  const handleToggleAudio = (track) => {};
+  const handleToggleAudio = (track) => {
+    if (currentTrack.id !== track.id) {
+      setCurrentTrack(track);
+      setPlaying(true);
 
-  const value = { currentTrack, isPlaying, handleToggleAudio };
+      audio.src = track.src;
+      audio.currentTime = 0;
+      audio.play();
+
+      return;
+    }
+
+    if (isPlaying) {
+      audio.pause();
+      setPlaying(false);
+    } else {
+      audio.play();
+      setPlaying(true);
+    }
+  };
+
+  const value = { audio, currentTrack, isPlaying, handleToggleAudio };
 
   return (
-    <AudioContext.Provider value={{ value }}>{children}</AudioContext.Provider>
+    <AudioContext.Provider value={value}>{children}</AudioContext.Provider>
   );
 };
 
