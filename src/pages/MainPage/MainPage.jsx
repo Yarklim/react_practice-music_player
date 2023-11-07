@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Track from '../../components/Track/Track';
-import tracksList from '../../data/trackList';
 import { Input } from '@mui/material';
+import tracksList from '../../data/trackList';
+import Track from '../../components/Track/Track';
 import s from './MainPage.module.scss';
 
 const runSearch = (query) => {
@@ -21,19 +21,20 @@ const runSearch = (query) => {
 const MainPage = () => {
   const [tracks, setTracks] = useState(tracksList);
 
-  const handleChange = (e) => {
-    const foundTracks = runSearch(e.target.value);
+  const handleChange = (event) => {
+    const foundTracks = runSearch(event.target.value);
     setTracks(foundTracks);
   };
+
   return (
     <div className={s.search}>
       <Input
         className={s.input}
-        placeholder="Search tracks"
+        placeholder="Поиск треков"
         onChange={handleChange}
       />
       <div className={s.list}>
-        {tracks?.map((track) => (
+        {tracks.map((track) => (
           <Track key={track.id} {...track} />
         ))}
       </div>
