@@ -4,7 +4,7 @@ import { IconButton } from '@mui/material';
 import { PlayArrow, Pause } from '@mui/icons-material';
 import secondsToMMSS from '../../utils/secondsToMMSS';
 import cn from 'classnames';
-import s from './Track.module.scss';
+import s from './Track.module.css';
 
 const Track = (track) => {
   const { id, preview, title, artists, duration } = track;

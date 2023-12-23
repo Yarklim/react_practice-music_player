@@ -3,7 +3,7 @@ import { AudioContext } from '../../context/AudioContext';
 import { Slider, IconButton } from '@mui/material';
 import { Pause, PlayArrow } from '@mui/icons-material';
 import secondsToMMSS from '../../utils/secondsToMMSS';
-import s from './playbar.module.scss';
+import s from './playbar.module.css';
 
 const TimeControls = () => {
   const { audio, currentTrack } = useContext(AudioContext);
